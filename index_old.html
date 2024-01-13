@@ -1,0 +1,190 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Olympia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background-color: #1c1c1c;
+        height: 300px;
+        width: 500px;
+        margin: 0;
+        border-radius: 8px;
+        padding: 24px;
+        box-sizing: border-box;
+      }
+
+      button {
+        all: unset;
+      }
+
+      textarea {
+        all: unset;
+      }
+
+      .draggable {
+        -webkit-user-select: none;
+        -webkit-app-region: drag;
+      }
+
+      .undraggable {
+        -webkit-app-region: no-drag;
+      }
+
+      .grow {
+        flex-grow: 1;
+      }
+
+      .main {
+        background-color: #141414;
+        padding: 8px;
+        height: 100%;
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 4px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+      }
+
+      .textbox {
+        background-color: #181818;
+        padding: 8px;
+        height: 100%;
+        width: 232px;
+        box-sizing: border-box;
+        border-radius: 4px;
+      }
+
+      .text {
+        color: #dedede;
+        font-weight: 400;
+        font-size: 12px;
+        font-family: "Roboto Mono";
+        cursor: text;
+        height: 100%;
+        width: 100%;
+        resize: none;
+        outline: 0;
+      }
+
+      .text::placeholder {
+        color: #606060;
+      }
+
+      .info {
+        color: #606060;
+        font-weight: 400;
+        font-size: 12px;
+        font-family: "Roboto Mono";
+        cursor: text;
+        height: 72px;
+        width: 100%;
+        resize: none;
+        outline: 0;
+      }
+
+      .icon {
+        width: 32px;
+        height: 32px;
+        opacity: 0.1;
+      }
+
+      .actions {
+        height: 100%;
+        width: 196px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .button {
+        background-color: #181818;
+        border-radius: 4px;
+        height: 48px;
+        width: 100%;
+        outline: 0;
+        box-shadow: none;
+        color: #dedede;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        font-weight: 500;
+        font-size: 14px;
+        font-family: "Inter";
+        cursor: pointer;
+      }
+
+      .scripts {
+        background-color: #1c1c1c;
+        padding: 12px;
+        box-sizing: border-box;
+        border-radius: 4px;
+        height: 100%;
+        width: 196px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .script {
+        color: #dedede;
+        font-weight: 500;
+        font-size: 14px;
+        font-family: "Inter";
+        height: 12px;
+        line-height: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="textbox">
+        <textarea
+          class="text"
+          id="text"
+          placeholder='print("Hello world!")'
+          spellcheck="false"
+          draggable="false"
+        ></textarea>
+      </div>
+      <div class="actions">
+        <button class="button" id="inject" draggable="false">Inject</button>
+        <button class="button" id="execute" draggable="false">Execute</button>
+        <div class="scripts" draggable="false">
+          <textarea
+            placeholder="Made by the Olympia Executor team. © 2024
+            Build: Beta 2024.0701"
+            spellcheck="false"
+            disabled="true"
+            draggable="false"
+            class="info"
+          ></textarea>
+          <div class="grow"></div>
+          <img src="./assets/image.png" class="icon" />
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const inject = document.getElementById("inject");
+      const execute = document.getElementById("execute");
+
+      inject.onclick = () => {
+        pywebview.api.inject();
+      };
+
+      execute.onclick = () => {
+        pywebview.api.execute();
+      };
+    </script>
+  </body>
+</html>
